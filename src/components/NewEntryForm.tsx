@@ -4,8 +4,6 @@ import { Button, Form, Icon, Input } from "antd";
 import { FormComponentProps, WrappedFormUtils } from "antd/lib/form/Form";
 import * as React from "react";
 
-import { EditableTagGroup } from "./EditableTagGroup";
-
 // An interface can extend another one.
 interface IFormProps extends FormComponentProps {
     // Here you can see how to declare a callable, just add params into the parenthesis and the return at the end
@@ -24,12 +22,6 @@ interface IDescriptionInputProps {
     getFieldDecorator: WrappedFormUtils["getFieldDecorator"];
 }
 
-interface ITagInputProps {
-    form: WrappedFormUtils;
-    tags: string[];
-    onTagsChange(tags: string[]): void;
-}
-
 const DescriptionInput = (props: IDescriptionInputProps): JSX.Element => (
     <>
         {props.getFieldDecorator("description", {
@@ -39,17 +31,6 @@ const DescriptionInput = (props: IDescriptionInputProps): JSX.Element => (
                 autoComplete={"off"}
                 prefix={<Icon type="form" />}
                 placeholder="Write here..."
-            />,
-        )}
-    </>
-);
-
-const TagInput = (props: ITagInputProps): JSX.Element => (
-    <>
-        {props.form.getFieldDecorator("tags")(
-            <EditableTagGroup
-                onChange={props.onTagsChange}
-                tags={props.tags}
             />,
         )}
     </>
@@ -92,13 +73,6 @@ class NewEntryFormContent extends React.PureComponent<IFormProps, IState> {
                     validateStatus={descrError ? "error" : ""}
                 >
                     <DescriptionInput getFieldDecorator={getFieldDecorator} />
-                </Form.Item>
-                <Form.Item>
-                    <TagInput
-                        form={this.props.form}
-                        tags={this.state.tags}
-                        onTagsChange={this.onTagsChange}
-                    />
                 </Form.Item>
                 <Form.Item>
                     <Button
