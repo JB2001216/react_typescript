@@ -3,9 +3,6 @@ import * as React from "react";
 
 import { IToDoEntry } from "../interfaces";
 
-// @TODO dichiara un componente EntriesList, che ritorna un Hello World! nella render
-import { EntriesList } from "./EntriesList";
-
 interface IState {
     entries: IToDoEntry[];
 }
@@ -32,12 +29,6 @@ export class RootView extends React.PureComponent<{}, IState> {
                     <Row>
                         <Col span={24}>
                             <h1>ToDo App</h1>
-
-                            <EntriesList
-                                entries={this.state.entries}
-                                onStatusToggle={this.toggleStatus}
-                            />
-
                         </Col>
                     </Row>
                 </Layout.Content>
