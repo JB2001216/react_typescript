@@ -1,10 +1,9 @@
 // tslint:disable: jsx-no-multiline-js
-import { Icon, Input, Tag, Tooltip } from "antd";
+import { Icon, Input, Tooltip, Tag } from "antd";
 import { WrappedFormUtils } from "antd/lib/form/Form";
 import * as React from "react";
 
 interface IProps {
-    tags: string[];
     // We need to use WrappedFormUtils["setFieldsValue"],
     // instead of WrappedFormUtils.setFieldsValue,
     // because WrappedFormUtils is a type and not a namespace.
@@ -17,7 +16,7 @@ interface IState {
 }
 
 export class EditableTagGroup extends React.Component<IProps, IState> {
-    private input: Input | null = null;
+    private input: Input = null;
 
     constructor(props: IProps) {
         super(props);
@@ -92,7 +91,7 @@ export class EditableTagGroup extends React.Component<IProps, IState> {
         );
     }
 
-    private handleClose(removedTag: string): void {
+    private handleClose(removedTag) {
         const tags = this.props.tags.filter((tag) => tag !== removedTag);
         this.props.onChange(tags);
     }
