@@ -3,6 +3,7 @@ import * as React from "react";
 
 import { IToDoEntry } from "../interfaces";
 
+// @TODO dichiara un componente EntriesList, che ritorna un Hello World! nella render
 import { EntriesList } from "./EntriesList";
 
 interface IState {
