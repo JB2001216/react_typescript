@@ -37,7 +37,7 @@ const DescriptionInput = (props: IDescriptionInputProps): JSX.Element => (
 );
 
 class NewEntryFormContent extends React.PureComponent<IFormProps, IState> {
-    constructor(props: IFormProps) {
+    constructor(props) {
         super(props);
 
         this.state = { tags: [] };
@@ -57,26 +57,26 @@ class NewEntryFormContent extends React.PureComponent<IFormProps, IState> {
             getFieldError,
             isFieldTouched,
         } = this.props.form;
-        const descrError =
+        const descrError = getFieldError("description");
+        const isDescrError =
             isFieldTouched("description") &&
-            getFieldError("description") !== undefined &&
-            getFieldError("description")!.length > 0;
+            descrError.length > 0;
 
         return (
             <Form layout="inline" onSubmit={this.onSubmit}>
                 <Form.Item
                     help={
-                        /* tslint:disable strict-boolean-expressions */ descrError
-                            ? getFieldError("description")
+                        /* tslint:disable strict-boolean-expressions */ isDescrError
+                            ? descrError
                             : ""
                     }
-                    validateStatus={descrError ? "error" : ""}
+                    validateStatus={isDescrError ? "error" : ""}
                 >
                     <DescriptionInput getFieldDecorator={getFieldDecorator} />
                 </Form.Item>
                 <Form.Item>
                     <Button
-                        disabled={descrError}
+                        disabled={isDescrError}
                         icon="rocket"
                         shape="circle"
                         type="primary"
@@ -87,7 +87,7 @@ class NewEntryFormContent extends React.PureComponent<IFormProps, IState> {
         );
     }
 
-    private onSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    private onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         this.props.form.validateFields((errors) => {
             if (!errors) {
@@ -95,7 +95,7 @@ class NewEntryFormContent extends React.PureComponent<IFormProps, IState> {
                     "description",
                 );
                 const tags:
-                    | string[]
+                    | string
                     | undefined = this.props.form.getFieldValue("tags");
 
                 this.props.onCreate(descr, tags !== undefined ? tags : []);
@@ -105,7 +105,7 @@ class NewEntryFormContent extends React.PureComponent<IFormProps, IState> {
         });
     }
 
-    private onTagsChange(tags: string[]): void {
+    private onTagsChange(tags): void {
         this.setState({ tags });
         this.props.form.setFieldsValue(tags);
     }
