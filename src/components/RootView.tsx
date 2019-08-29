@@ -4,7 +4,6 @@ import * as React from "react";
 import { IToDoEntry } from "../interfaces";
 
 import { EntriesList } from "./EntriesList";
-import { NewEntryForm } from "./NewEntryForm";
 
 interface IState {
     entries: IToDoEntry[];
@@ -34,7 +33,6 @@ export class RootView extends React.PureComponent<{}, IState> {
                                 onStatusToggle={this.toggleStatus}
                             />
 
-                            <NewEntryForm onCreate={this.addNewEntry} />
                         </Col>
                     </Row>
                 </Layout.Content>
