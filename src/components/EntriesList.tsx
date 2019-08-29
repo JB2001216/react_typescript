@@ -5,7 +5,7 @@ import { IToDoEntry } from "../interfaces";
 
 interface IEntryProps {
     entry: IToDoEntry;
-    onStatusToggle(entryId: symbol): void;
+    onStatusToggle(entryId): void;
 }
 
 interface IListProps {
@@ -29,17 +29,14 @@ const EntryCheck = (props: IEntryProps): JSX.Element => (
 );
 
 const Entry = (props: IEntryProps): JSX.Element => {
-    // Here we don't need to suffix dueDate with ! (when calling props.entry.dueDate.toUTCString())
-    // because we're ensuring props.entry.dueDate is not undefined.
-    const descr =
-        props.entry.dueDate !== undefined
-            ? props.entry.dueDate.toUTCString()
-            : "";
-    const tags = props.entry.tags.map((tag: string) => (
-        <Tag color={randomColor()} key={tag}>
-            {tag}
-        </Tag>
-    ));
+
+    // @TODO Dichiare `descr` e popola la stringa con la dueDate quando disponibile, o ""
+
+    // @TODO Dichiara `tags` (JSX.Element[]). Popolala iterando props.entry.tags e ritorna:
+    // <Tag color={randomColor()} key={tag}>
+    //     {tag}
+    // </Tag>
+    // nella funzione che esegui ad ogni passo dell'iterazione.
 
     const toggleStatus = (
         <EntryCheck
@@ -66,11 +63,13 @@ export const EntriesList = (props: IListProps): JSX.Element => {
         <Entry entry={entry} onStatusToggle={props.onStatusToggle} />
     );
 
+    const header: JSX.Element = 1;
+
     return (
         <List
             bordered={true}
             dataSource={props.entries}
-            header={<h3>To do:</h3>}
+            header={header}
             renderItem={renderItem}
         />
     );
