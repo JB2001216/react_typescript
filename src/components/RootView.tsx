@@ -20,6 +20,10 @@ export class RootView extends React.PureComponent<{}, IState> {
         this.toggleStatus = this.toggleStatus.bind(this);
     }
 
+    public componentDidMount(): void {
+        this.addNewEntry("Test description", ["tag1", "tag2"]);
+    }
+
     public render(): JSX.Element {
         return (
             <Layout>
