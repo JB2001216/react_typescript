@@ -1,1 +1,1 @@
-export const App = (): JSX.Element => <div />;
+// export const App = (): JSX.Element => <div />;
