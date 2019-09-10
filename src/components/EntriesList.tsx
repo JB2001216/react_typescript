@@ -30,7 +30,7 @@ const EntryCheck = (props: IEntryProps): JSX.Element => (
 
 const Entry = (props: IEntryProps): JSX.Element => {
 
-    // @TODO Dichiare `descr` e popola la stringa con la dueDate quando disponibile, o ""
+    // @TODO Dichiara `descr` e popola la stringa con la dueDate quando disponibile, o ""
 
     // @TODO Dichiara `tags` (JSX.Element[]). Popolala iterando props.entry.tags e ritorna:
     // <Tag color={randomColor()} key={tag}>
